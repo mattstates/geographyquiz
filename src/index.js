@@ -13,7 +13,7 @@ let correctAnswerText;
 let questionCount = 0;
 let scoreCount = 0;
 
-var width = 960,
+var width = 1000,
     height = 500,
     active = d3.select(null);
 
@@ -22,7 +22,7 @@ let colorScale = d3.scaleSequential(d3.interpolateRainbow).domain([100, 40000]);
 var projection = d3geoProj
     .geoRobinson()
     .scale(170)
-    .translate([width / 2, height / 1.75]);
+    .translate([width / 2.25, height / 1.75]);
 
 var zoom = d3
     .zoom()
@@ -62,13 +62,15 @@ d3.json('/maps/map', function(error, mapJson) {
     g
         .selectAll('path')
         .data(mapPaths, function(country, i) {
-            if (country.properties.name !== 'District of Columbia') {
-                questions.push(country.properties.name);
-            }
+            questions.push({
+                countryName: country.properties.name,
+                pathID: i
+            });
         })
         .enter()
         .append('path')
         .attr('d', path)
+        .attr('data-index', function(data, i) { return i; })
         .attr('fill', function(data, i) {
             return colorScale(Math.random() * 10 + i * 230);
         })
@@ -141,13 +143,22 @@ function stopped() {
 }
 
 randomBtn.addEventListener('click', function() {
-    generateQuestion();
+    reset();
+    let previousCountryPathElement = document.querySelector(`path[data-index="${questionData.pathID}"]`);
+    previousCountryPathElement.classList.add('learnCountry');
+    document.body.classList.add('disable');
+    window.setTimeout(function() {
+        previousCountryPathElement.classList.remove('learnCountry');
+        generateQuestion();
+        document.body.classList.remove('disable');
+    }, 3000);
     scoreEl.innerText = scoreUpdate(false);
-
 });
 
+let questionData = {};
 function generateQuestion() {
-    question.innerHTML = `Where is <strong id='test'>${questions[Math.floor(Math.random() * questions.length)]}</strong>?`;
+    questionData = questions[Math.floor(Math.random() * questions.length)];
+    question.innerHTML = `Where is <strong id='test'>${questionData.countryName}</strong>?`;
 }
 
 function correctAnswer() {
