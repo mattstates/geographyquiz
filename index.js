@@ -14,10 +14,8 @@ app.use(function(req, res, next) {
 
 app.get('/', (req, res) => res.send('index.html'));
 app.get('/maps/*', (req, res) => {
-    console.log(req.url);
+
     res.sendFile('/maps/world-countries-sans-antarctica.json', { root: __dirname });
-    //console.log(JSON.stringify({ test: 'this is a test' }));
-    //res.send(JSON.stringify({ test: 'this is a test' }));
 
 });
 

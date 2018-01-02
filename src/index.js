@@ -1,111 +1,172 @@
-import * as d3Main from 'd3';
+import * as d3 from 'd3';
 import * as topojson from 'topojson';
 import * as d3geoProj from 'd3-geo-projection';
 
-let d3 = Object.assign({}, d3Main, d3geoProj);
-
 let questions = [];
-var width = 960;
-var height = 500;
-
 let question = document.getElementById('question');
 let randomBtn = document.getElementById('random');
 let score = document.getElementById('score');
+let status = document.getElementById('status');
+
+let activeAnswer = null;
 let correctAnswerText;
 let oldColor;
 
-var svg = d3.select('#map')
+var width = 960,
+    height = 500,
+    active = d3.select(null);
+
+let colorScale = d3.scaleSequential(d3.interpolateRainbow).domain([100, 40000]);
+
+var projection = d3geoProj
+    .geoRobinson()
+    .scale(170)
+    .translate([width / 2, height / 1.75]);
+
+var zoom = d3
+    .zoom()
+    .scaleExtent([1, 8])
+    .on('zoom', zoomed);
+
+var path = d3.geoPath().projection(projection);
+
+var svg = d3
+    .select('#map')
     .append('svg')
+    .attr('class', 'map')
     .attr('width', width)
     .attr('height', height)
-    .attr('class', 'map')
-    .append('g');
+    .on('click', stopped, true);
 
-var projection = d3.geoRobinson()
-    //   .scale(width / 1.25); USA
-    .scale(width / 5.6);
+svg
+    .append('rect')
+    .attr('class', 'background')
+    .attr('width', width)
+    .attr('height', height)
+    .on('click', reset);
 
-//    .translate([Math.sqrt(width / 2), height / 2]);
+var g = svg.append('g');
 
-// projection.center([-98, 36]); USA
-projection.center([15, 10]);
+svg.call(zoom); // delete this line to disable free zooming
 
-
-var path = d3.geoPath()
-    .projection(projection);
-
-var url = '/maps/world-110m.geojson';
-
-d3.json(url, function(err, mapJson) {
-    //console.log(mapJson);
-    if (err) {
-        console.log('error in d3.json', err);
+// TODO: Update map and routing for new maps.
+d3.json('/maps/map', function(error, mapJson) {
+    if (error) {
+        throw error;
     }
     let mapDivisions = Object.keys(mapJson.objects)[0];
-    let countries = topojson.feature(mapJson, mapJson.objects[mapDivisions]).features;
-    //console.log(countries, '<-- countries');
-    let colorScale = d3.scaleSequential(d3.interpolateRainbow).domain([30, 750]);
 
-    svg.selectAll('.country')
-        .data(countries, function(country, i) {
-            console.log(i, country, 'country');
+    let mapPaths = topojson.feature(mapJson, mapJson.objects[mapDivisions]).features;
+
+    g
+        .selectAll('path')
+        .data(mapPaths, function(country, i) {
             if (country.properties.name !== 'District of Columbia') {
-
                 questions.push(country.properties.name);
             }
         })
         .enter()
         .append('path')
-        .attr('class', 'country')
         .attr('d', path)
-        .attr('stroke', 'rgba(50,50,50,.6)')
         .attr('fill', function(data, i) {
-            return colorScale(i * 7);
+            return colorScale(Math.random() * 10 + i * 230);
         })
         .on('mouseover', function() {
-            // console.log(d);
-            // console.log(this.getAttribute('fill'));
-            oldColor = this.getAttribute('fill');
-            // this.setAttribute('stroke', 'rgba(250,250,250,.9)');
-            this.setAttribute('stroke-width', 0.2);
-            this.setAttribute('fill', 'yellow');
+            this.classList.add('hover');
         })
         .on('mouseout', function() {
-            // this.setAttribute('stroke', 'black');
-            this.setAttribute('stroke-width', 1);
-            this.setAttribute('fill', oldColor);
-
+            this.classList.remove('hover');
         })
-        .on('click', function(data) {
-            status.classList.remove('correct', 'wrong');
-            correctAnswerText = document.getElementById('test');
-            data.properties.name === correctAnswerText.innerText ? correctAnswer() : wrongAnswer();
-        });
-    console.log(questions);
+        .on('click', clicked);
+
+    g
+        .append('path')
+        .datum(
+            topojson.mesh(mapJson, mapJson.objects[mapDivisions], function(a, b) {
+                return a !== b;
+            })
+        )
+        .attr('class', 'mesh')
+        .attr('d', path);
+
+    generateQuestion();
 });
 
+function clicked(d) {
+    if (active.node() === this) {
+        return reset();
+    }
+    active.classed('active', false);
+    active = d3.select(this).classed('active', true);
+    activeAnswer = d.properties.name;
+
+    var bounds = path.bounds(d),
+        dx = bounds[1][0] - bounds[0][0],
+        dy = bounds[1][1] - bounds[0][1],
+        x = (bounds[0][0] + bounds[1][0]) / 2,
+        y = (bounds[0][1] + bounds[1][1]) / 2,
+        scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
+        translate = [width / 2 - scale * x, height / 2 - scale * y];
+
+    svg
+        .transition()
+        .duration(750)
+        .call(zoom.transform, d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale));
+}
+
+function reset() {
+    active.classed('active', false);
+    active = d3.select(null);
+
+    svg
+        .transition()
+        .duration(750)
+        .call(zoom.transform, d3.zoomIdentity);
+
+    activeAnswer = null;
+}
+
+function zoomed() {
+    g.style('stroke-width', 1.5 / d3.event.transform.k + 'px');
+    g.attr('transform', d3.event.transform);
+}
+
+// If the drag behavior prevents the default click,
+// also stop propagation so we don’t click-to-zoom.
+function stopped() {
+    if (d3.event.defaultPrevented) {
+        d3.event.stopPropagation();
+    }
+}
 
 randomBtn.addEventListener('click', generateQuestion);
-let status = document.getElementById('status');
 
 function generateQuestion() {
     question.innerHTML = `Where is <strong id='test'>${questions[Math.floor(Math.random() * questions.length)]}</strong>?`;
-    //status.classList.remove('correct', 'wrong');
-
 }
 
 function correctAnswer() {
     let scoreCount = parseInt(score.innerText);
     score.innerText = scoreCount += 1;
     status.innerText = 'CORRECT!';
-    // status.classList.remove('correct', 'wrong');
-
     status.classList.add('correct');
     generateQuestion();
+    reset();
 }
 
 function wrongAnswer() {
     status.innerText = 'WRONG!';
-    // status.classList.remove('correct', 'wrong');
     status.classList.add('wrong');
+    active.classed('active', false);
+    active = d3.select(null);
+    activeAnswer = null;
 }
+
+window.addEventListener('keyup', function(e) {
+    if (e.which === 13 && activeAnswer !== null) {
+        event.preventDefault();
+        status.classList.remove('correct', 'wrong');
+        correctAnswerText = document.getElementById('test');
+        activeAnswer === correctAnswerText.innerText ? correctAnswer() : wrongAnswer();
+    }
+});

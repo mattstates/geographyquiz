@@ -24,10 +24,15 @@
         width: 100px;
     }
 
+    svg {
+        background-color: rgba(8, 8, 36, 0.9);
+    }
+
    .init {
        opacity: 0;
-       transform: translateY(-140px)
-   }
+       transform: translateY(-250px);
+       font-family: Helvetica, Arial, sans-serif;
+    }
 
     .correct {
         background-color: rgba(0,200,0,.7);
@@ -42,6 +47,7 @@
     }
 
     p {
+        font-family: Helvetica, Arial, sans-serif;
         text-align: center;
     }
 
@@ -63,23 +69,54 @@
         0%   {opacity: 0}
         50%  {opacity: 1}
         99%  {opacity: 1}
-        100% {opacity: 0; transform: translateY(-200px);}
+        100% {opacity: 0; transform: translateY(-380px);}
     }
+
+    .background {
+  fill: none;
+  pointer-events: all;
+}
+
+.feature {
+  cursor: pointer;
+}
+
+.hover {
+    fill: yellow;
+}
+
+.active {
+  fill: white;
+  stroke: yellow;
+  stroke-width: 1.5;
+  fill-opacity: 1;
+}
+
+.mesh {
+  fill: none;
+  stroke: rgba(50,50,50, 0.7);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
     
 </style>
 
 <body>
     <h1>Geography Game</h1>
+    <p>INSTRUCTIONS: Click on the country in the map that matches the question. When you have selected a country press 'Enter' on the keyboard to submit your answer.</p>
     <div id="map">
     </div>
-    <h2>Score: <span id="score">0</span></h2>
-    <span class="init" id="status"></span>
     <p id="question"></p>
+
+    <h2>Score: <span id="score">0</span></h2>
+
     <div class="btn-group">
         <!-- <button>Log In</button> -->
-        <button id="random">Play Random</button>
+        <button id="random">New Random Country</button>
         <!-- <button>Create Account</button> -->
     </div>
+    <span class="init" id="status"></span>
+
     <script src="bundle.js"></script>
 
 
