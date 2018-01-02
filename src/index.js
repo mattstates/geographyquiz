@@ -34,7 +34,7 @@ projection.center([15, 10]);
 var path = d3.geoPath()
     .projection(projection);
 
-var url = 'http://localhost:8081/maps/world-110m.geojson';
+var url = '/maps/world-110m.geojson';
 
 d3.json(url, function(err, mapJson) {
     //console.log(mapJson);
