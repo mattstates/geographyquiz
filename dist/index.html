@@ -1,18 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Geography Game 2</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Geography Game</title>
 </head>
+<style>
+    h1, h2 {
+        font-family: Helvetica, Arial, sans-serif;
+        font-weight: 200;
+        text-align: center
+    }
+
+    #status {
+        border-radius: 10px;
+        color: white;
+        display: block;
+        margin: 0 auto;
+        padding: 30px;
+        text-align: center;
+        width: 100px;
+    }
+
+   .init {
+       opacity: 0;
+       transform: translateY(-140px)
+   }
+
+    .correct {
+        background-color: rgba(0,200,0,.7);
+        animation-name: answer;
+        animation-duration: 1s;
+    }
+
+    .wrong {
+        background-color: rgba(200,0,0,.7);
+        animation-name: answer;
+        animation-duration: 1s;
+    }
+
+    p {
+        text-align: center;
+    }
+
+    svg.map {
+        border: 1px solid black;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .btn-group {
+        display: flex;
+        justify-content: space-around;
+        margin: 0 auto;
+        padding: 24px 0;
+        width: 900px;
+    }
+
+    @keyframes answer {
+        0%   {opacity: 0}
+        50%  {opacity: 1}
+        99%  {opacity: 1}
+        100% {opacity: 0; transform: translateY(-200px);}
+    }
+    
+</style>
+
 <body>
-	<h1>Geography Game 2</h1>
-	<div>
-	<img src="/img/main.png">
-</div>
-	<button>Log In</button><button>Play Random</button><button>Create Account</button>
-	<script src="bundle.js"></script>
+    <h1>Geography Game</h1>
+    <div id="map">
+    </div>
+    <h2>Score: <span id="score">0</span></h2>
+    <span class="init" id="status"></span>
+    <p id="question"></p>
+    <div class="btn-group">
+        <!-- <button>Log In</button> -->
+        <button id="random">Play Random</button>
+        <!-- <button>Create Account</button> -->
+    </div>
+    <script src="bundle.js"></script>
+
 
 </body>
+
 </html>

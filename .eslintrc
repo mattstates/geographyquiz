@@ -50,7 +50,12 @@
 		"linebreak-style": [0, "unix"],
 		"no-multi-spaces": 1,
 		"no-multi-str": 0,
-		"no-multiple-empty-lines": [1, { "max": 2 }],
+		"no-multiple-empty-lines": [
+			1,
+			{
+				"max": 2
+			}
+		],
 		"no-native-reassign": 2,
 		"no-negated-in-lhs": 2,
 		"no-nested-ternary": 1,
@@ -92,12 +97,24 @@
 		"no-unneeded-ternary": 0,
 		"no-unreachable": 2,
 		"no-unused-expressions": 1,
-		"no-unused-vars": [2, { "vars": "all", "args": "after-used" }],
+		"no-unused-vars": [
+			2,
+			{
+				"vars": "all",
+				"args": "after-used"
+			}
+		],
 		"no-use-before-define": 2,
 		"no-useless-call": 2,
 		"no-void": 0,
 		"no-var": 0,
-		"no-warning-comments": [1, { "terms": ["todo", "fixme", "xxx"], "location": "start" }],
+		"no-warning-comments": [
+			1,
+			{
+				"terms": ["todo", "fixme", "xxx"],
+				"location": "start"
+			}
+		],
 		"no-with": 1,
 
 		"array-bracket-spacing": [1, "never"],
@@ -105,9 +122,20 @@
 		"arrow-spacing": 1,
 		"accessor-pairs": 1,
 		"block-scoped-var": 0,
-		"brace-style": [1, "stroustrup"],
+		"brace-style": [
+			2,
+			"1tbs",
+			{
+				"allowSingleLine": true
+			}
+		],
 		"callback-return": [2, ["callback", "cb", "next"]],
-		"camelcase": [2, { "properties": "always" }],
+		"camelcase": [
+			2,
+			{
+				"properties": "always"
+			}
+		],
 		"comma-dangle": [2, "never"],
 		"comma-spacing": 2,
 		"comma-style": 1,
@@ -119,7 +147,12 @@
 		"curly": [1, "all"],
 		"default-case": 1,
 		"dot-location": [1, "property"],
-		"dot-notation": [1, { "allowKeywords": true }],
+		"dot-notation": [
+			1,
+			{
+				"allowKeywords": true
+			}
+		],
 		"eol-last": 0,
 		"eqeqeq": 1,
 		"func-names": 0,
@@ -127,10 +160,23 @@
 		"generator-star-spacing": 0,
 		"guard-for-in": 1,
 		"handle-callback-err": 1,
-		"id-length": [2, { "min": 3, "max": 25, "exceptions": ["x", "y", "i", "j", "ex", "up"] }],
-		"indent": [1, 2, { "SwitchCase": 1 }],
+		"id-length": [
+			2,
+			{
+				"min": 3,
+				"max": 25,
+				"exceptions": ["x", "y", "i", "j", "ex", "up"]
+			}
+		],
+		"indent": ["error", 4, { "SwitchCase": 1 }],
 		"init-declarations": 0,
-		"key-spacing": [1, { "beforeColon": false, "afterColon": true }],
+		"key-spacing": [
+			1,
+			{
+				"beforeColon": false,
+				"afterColon": true
+			}
+		],
 		"keyword-spacing": 1,
 		"lines-around-comment": 0,
 		"max-depth": [1, 4],
@@ -161,13 +207,25 @@
 		"id-match": 0,
 		"require-yield": 0,
 		"semi": [1, "always"],
-		"semi-spacing": [1, { "before": false, "after": true }],
+		"semi-spacing": [
+			1,
+			{
+				"before": false,
+				"after": true
+			}
+		],
 		"sort-vars": 0,
 		"space-before-blocks": [1, "always"],
 		"space-before-function-paren": [1, "never"],
 		"space-in-parens": [1, "never"],
 		"space-infix-ops": 1,
-		"space-unary-ops": [1, { "words": true, "nonwords": false }],
+		"space-unary-ops": [
+			1,
+			{
+				"words": true,
+				"nonwords": false
+			}
+		],
 		"spaced-comment": 0,
 		"strict": [0, "global"],
 		"use-isnan": 2,
