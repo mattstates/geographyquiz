@@ -5,12 +5,13 @@ import * as d3geoProj from 'd3-geo-projection';
 let questions = [];
 let question = document.getElementById('question');
 let randomBtn = document.getElementById('random');
-let score = document.getElementById('score');
+let scoreEl = document.getElementById('score');
 let status = document.getElementById('status');
 
 let activeAnswer = null;
 let correctAnswerText;
-let oldColor;
+let questionCount = 0;
+let scoreCount = 0;
 
 var width = 960,
     height = 500,
@@ -139,15 +140,18 @@ function stopped() {
     }
 }
 
-randomBtn.addEventListener('click', generateQuestion);
+randomBtn.addEventListener('click', function() {
+    generateQuestion();
+    scoreEl.innerText = scoreUpdate(false);
+
+});
 
 function generateQuestion() {
     question.innerHTML = `Where is <strong id='test'>${questions[Math.floor(Math.random() * questions.length)]}</strong>?`;
 }
 
 function correctAnswer() {
-    let scoreCount = parseInt(score.innerText);
-    score.innerText = scoreCount += 1;
+    scoreEl.innerText = scoreUpdate(true);
     status.innerText = 'CORRECT!';
     status.classList.add('correct');
     generateQuestion();
@@ -155,11 +159,22 @@ function correctAnswer() {
 }
 
 function wrongAnswer() {
+    scoreEl.innerText = scoreUpdate(false);
     status.innerText = 'WRONG!';
     status.classList.add('wrong');
     active.classed('active', false);
     active = d3.select(null);
     activeAnswer = null;
+}
+
+function scoreUpdate(correct) {
+
+    scoreCount = correct ? scoreCount += 1 : scoreCount;
+    questionCount += 1;
+
+    let percentage = scoreCount ? ` – ${((scoreCount / questionCount) * 100).toFixed(2)}%` : '';
+
+    return `${scoreCount} out of ${questionCount}${percentage}`;
 }
 
 window.addEventListener('keyup', function(e) {
