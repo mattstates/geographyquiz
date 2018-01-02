@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 8081;
-
+const PORT = process.env.PORT || 3000;
+const favicon = require('serve-favicon');
+const path = require('path');
 
 app.use(express.static('dist'));
 app.use(express.static('maps'));
+app.use(favicon(path.join(__dirname, 'favicon.ico')));
 
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -19,4 +21,4 @@ app.get('/maps/*', (req, res) => {
 
 });
 
-app.listen(PORT, () => console.log(`I am listening on ${PORT}`));
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
