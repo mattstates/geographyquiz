@@ -13,7 +13,7 @@ let correctAnswerText;
 let questionCount = 0;
 let scoreCount = 0;
 
-var width = window.outerWidth > 1000 ? 1000 : window.innerWidth * 2,
+var width = window.outerWidth > 1000 ? 1000 : window.innerWidth,
     height = 500,
     active = d3.select(null);
 
