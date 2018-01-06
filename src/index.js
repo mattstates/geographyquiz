@@ -13,11 +13,9 @@ let correctAnswerText;
 let questionCount = 0;
 let scoreCount = 0;
 
-var width = 1000,
+var width = window.outerWidth > 1000 ? 1000 : window.outerWidth * 2,
     height = 500,
     active = d3.select(null);
-
-let colorScale = d3.scaleSequential(d3.interpolateRainbow).domain([100, 40000]);
 
 var projection = d3geoProj
     .geoRobinson()
@@ -52,10 +50,12 @@ svg.call(zoom); // delete this line to disable free zooming
 
 // TODO: Update map and routing for new maps.
 d3.json('/maps/map', function(error, mapJson) {
+    // Code borrowed from https://bl.ocks.org/mbostock.
     if (error) {
         throw error;
     }
     let mapDivisions = Object.keys(mapJson.objects)[0];
+    let colorScale = d3.scaleSequential(d3.interpolateRainbow).domain([1, 51]);
 
     let mapPaths = topojson.feature(mapJson, mapJson.objects[mapDivisions]).features;
 
@@ -72,7 +72,7 @@ d3.json('/maps/map', function(error, mapJson) {
         .attr('d', path)
         .attr('data-index', function(data, i) { return i; })
         .attr('fill', function(data, i) {
-            return colorScale(Math.random() * 10 + i * 230);
+            return colorScale(Math.random() * 2 + i * 2);
         })
         .on('mouseover', function() {
             this.classList.add('hover');
@@ -188,11 +188,14 @@ function scoreUpdate(correct) {
     return `${scoreCount} out of ${questionCount}${percentage}`;
 }
 
-window.addEventListener('keyup', function(e) {
-    if (e.which === 13 && activeAnswer !== null) {
+window.addEventListener('keyup', submitAnswer);
+document.getElementById('submitAnswer').addEventListener('click', submitAnswer);
+
+function submitAnswer(e) {
+    if ([1, 13].indexOf(e.which) > -1 && activeAnswer !== null) {
         event.preventDefault();
         status.classList.remove('correct', 'wrong');
         correctAnswerText = document.getElementById('test');
         activeAnswer === correctAnswerText.innerText ? correctAnswer() : wrongAnswer();
     }
-});
+}

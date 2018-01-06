@@ -1,6 +1,6 @@
 const path = require('path');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
@@ -14,10 +14,8 @@ module.exports = {
         hot: true
     },
     plugins: [
-        // new CleanWebpackPlugin(['dist']),
-        // new HtmlWebpackPlugin({
-        // 	title: 'Hot Module Replacement'
-        // }),
+        new CleanWebpackPlugin(['dist']),
+        new HtmlWebpackPlugin({ template: './src/index.html' }),
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin()
     ],
