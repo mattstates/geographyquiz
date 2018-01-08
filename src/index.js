@@ -4,7 +4,7 @@ import * as d3geoProj from 'd3-geo-projection';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
-
+/*
 let questions = [];
 let question = document.getElementById('question');
 let randomBtn = document.getElementById('random');
@@ -202,5 +202,5 @@ function submitAnswer(e) {
         activeAnswer === correctAnswerText.innerText ? correctAnswer() : wrongAnswer();
     }
 }
-
+*/
 ReactDOM.render(<App />, document.getElementById('app'));
