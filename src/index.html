@@ -9,18 +9,13 @@
 </head>
 <style>
     body {
+        font-family: Helvetica, Arial, sans-serif;
         margin: 0;
         padding: 0;
         width: 100vw;
     }
-    h1,
-    h2 {
-        font-family: Helvetica, Arial, sans-serif;
-        font-weight: 200;
-        text-align: center
-    }
 
-    #status {
+    /* #status {
         border-radius: 10px;
         color: white;
         display: block;
@@ -28,48 +23,41 @@
         padding: 30px;
         text-align: center;
         width: 100px;
-    }
+    } */
 
-    svg {
-        background-color: rgba(8, 8, 36, 0.9);
-        margin: 0 auto;
-    }
-
-    .init {
+    /* .init {
         opacity: 0;
         transform: translateY(-250px);
         font-family: Helvetica, Arial, sans-serif;
-    }
+    } */
 
-    .correct {
+    /* .correct {
         background-color: rgba(0, 200, 0, .7);
         animation-name: answer;
         animation-duration: 1s;
-    }
+    } */
 
-    .wrong {
+    /* .wrong {
         background-color: rgba(200, 0, 0, .7);
         animation-name: answer;
         animation-duration: 1s;
-    }
+    } */
 
-    p {
-        font-family: Helvetica, Arial, sans-serif;
-        text-align: center;
-    }
 
     svg.map {
         display: block;
         margin: 0 auto;
+        background-color: rgba(8, 8, 36, 0.9);
+        margin: 0 auto;
     }
 
-    .btn-group {
+    /* .btn-group {
         display: flex;
         justify-content: space-around;
         margin: 0 auto;
         padding: 24px 0;
         width: 85%;
-    }
+    } */
 
     .disable {
         pointer-events: none;
@@ -102,7 +90,7 @@
         }
     }
 
-    @keyframes answer {
+    /* @keyframes answer {
         0% {
             opacity: 0
         }
@@ -116,7 +104,7 @@
             opacity: 0;
             transform: translateY(-380px);
         }
-    }
+    } */
 
     @keyframes active {
         0% {
@@ -128,6 +116,8 @@
             fill-opacity: .7;
         }
     }
+
+    
 
     .background {
         fill: none;
@@ -160,21 +150,13 @@
         stroke-linecap: round;
         stroke-linejoin: round;
     }
-
-    form {
-        width: 50%;
-        margin: 0 auto;
-        display: flex;
-        justify-content: center;
-    }
 </style>
 
 <body>
-    <h1>Geography Game</h1>
 
         <!-- React Entry -->
         <div id="app"></div>
-    <p id="question"></p>
+    <!-- <p id="question"></p>
 
     <h2>Score:
         <span id="score">0</span>
@@ -182,18 +164,20 @@
 
     <div class="btn-group">
         <!-- <button>Log In</button> -->
-        <button id="random">New Random Country</button>
+        <!-- <button id="random">New Random Country</button> -->
         <!-- <button>Create Account</button> -->
-        <button id="submitAnswer">Submit Answer</button>
-    </div>
+        <!-- <button id="submitAnswer">Submit Answer</button> -->
+    <!-- </div> -->
+    <div style="text-align: center; margin-top: 1rem;">
     <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
         <input type="hidden" name="cmd" value="_s-xclick">
         <input type="hidden" name="hosted_button_id" value="RD2XTT568H5DJ">
-        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+        <input style="cursor: pointer;" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
         <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-        </form>
-        
-    <span class="init" id="status"></span>
+    </form>
+</div>
+
+
 </body>
 
 </html>

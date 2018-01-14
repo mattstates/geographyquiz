@@ -15,10 +15,22 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', (req, res) => res.send('index.html'));
-app.get('/maps/*', (req, res) => {
 
-    res.sendFile('/maps/world-countries-sans-antarctica.json', { root: __dirname });
+app.get('/maps/world', (req, res) => {
 
+    res.sendFile('/server/maps/world-countries-sans-antarctica.json', { root: __dirname });
+
+});
+
+app.get('/maps/usa', (req, res) => {
+
+    res.sendFile('/server/maps/us-albers.json', { root: __dirname });
+
+});
+
+app.get('/getMaps', (req, res) => {
+    console.log(req);
+    res.json({ mapsList: ['world'] });
 });
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));

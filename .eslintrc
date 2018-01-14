@@ -96,9 +96,9 @@
 		"no-underscore-dangle": 0,
 		"no-unneeded-ternary": 0,
 		"no-unreachable": 2,
-		"no-unused-expressions": 1,
+		"no-unused-expressions": 0,
 		"no-unused-vars": [
-			2,
+			1,
 			{
 				"vars": "all",
 				"args": "after-used"
@@ -109,9 +109,9 @@
 		"no-void": 0,
 		"no-var": 0,
 		"no-warning-comments": [
-			1,
+			0,
 			{
-				"terms": ["todo", "fixme", "xxx"],
+				"terms": ["todo", "fixme", "xxx", "TODO"],
 				"location": "start"
 			}
 		],
@@ -183,7 +183,7 @@
 		"max-len": [1, 160, 2],
 		"max-nested-callbacks": [1, 2],
 		"max-params": [1, 5],
-		"max-statements": [1, 30],
+		"max-statements": [1, 60],
 		"new-cap": 1,
 		"new-parens": 1,
 		"newline-after-var": 0,
