@@ -29,7 +29,6 @@ app.get('/maps/usa', (req, res) => {
 });
 
 app.get('/getMaps', (req, res) => {
-    console.log(req);
     res.json({ mapsList: ['world'] });
 });
 

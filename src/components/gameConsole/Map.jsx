@@ -3,53 +3,92 @@ import * as topojson from 'topojson';
 import * as d3geoProj from 'd3-geo-projection';
 import React from 'react';
 
-export default class Map extends React.Component {
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as actionCreators from '../../actions/actionCreators';
+
+function mapStateToProps(store) {
+    // add all of these properties to props...
+    console.log(store);
+    return {
+        correctAnswerCount: store.correctAnswerCount,
+        currentCountry: store.currentCountry,
+        currentMap: store.currentMap,
+        score: store.score,
+        currentQuestion: store.currentQuestion,
+        previousQuestion: store.previousQuestion,
+        questionCount: store.questionCount,
+        mapJson: store.mapJson,
+        questions: store.questions,
+        selectedCountry: store.selectedCountry
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(actionCreators, dispatch);
+}
+
+class Map extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loaded: false,
             mapProps: {
                 width: window.outerWidth > 1000 ? 1000 : window.innerWidth,
                 height: 500,
                 scale: 170
-            }
+            },
+            formerQuestion: ''
         };
         this.d3MapGenerator = this.d3MapGenerator.bind(this);
     }
     render() {
-        return <svg className="map" ref={(node) => this.node = node} />;
+        return <svg data-attempts={this.props.attemptCount} className="map" ref={(node) => (this.node = node)} />;
     }
 
     componentDidMount() {
-
-        console.log(this.props, 'componenet mounted');
         this.d3MapGenerator();
     }
-
+    shouldComponentUpdate(nextProps) {
+        return nextProps.attemptCount !== this.props.attemptCount; // Also check that the map type or JSON has changed.
+    }
     componentDidUpdate() {
-        this.d3MapGenerator();
+        console.log(this.state, 'component did update')
+        this.reset();
+        let element;
+        if (this.props.needsCorrection) {
+            console.log(this.props);
+            const { previousQuestion } = this.props;
+            element = [].slice.call(this.node.querySelectorAll('path')).find(function(element) {
+                return element.getAttribute('data-country') === previousQuestion;
+            });
+            element.classList.add('learnCountry');
+            setTimeout(function() {
+                element.classList.remove('learnCountry');
+            }, 1500);
+        }
     }
 
     d3MapGenerator() {
-        console.log(this, '<-- Map Generator;');
-        var active = d3.select(null);
+        this.reset = reset;
+        const props = this.props;
+        let active = d3.select(null);
         const width = this.state.mapProps.width,
             height = this.state.mapProps.height,
             scale = this.state.mapProps.scale;
 
-        var projection = d3geoProj
+        const projection = d3geoProj
             .geoRobinson()
             .scale(scale) // TODO: FIX
             .translate([width / 2.25, height / 1.75]); // TODO: FIX
 
-        var zoom = d3
+        const zoom = d3
             .zoom()
             .scaleExtent([1, 8])
             .on('zoom', zoomed);
 
-        var path = d3.geoPath().projection(projection);
+        const path = d3.geoPath().projection(projection);
 
-        var svg = d3
+        const svg = d3
             .select(this.node)
             .attr('class', 'map')
             .attr('width', width)
@@ -63,16 +102,16 @@ export default class Map extends React.Component {
             .attr('height', height)
             .on('click', reset);
 
-        var g = svg.append('g');
+        const g = svg.append('g');
 
         svg.call(zoom); // delete this line to disable free zooming
 
         // Code borrowed from https://bl.ocks.org/mbostock.
-        let mapJson = this.props.mapJson;
-        let mapDivisions = Object.keys(mapJson.objects)[0]; // TODO: How should we normalize the map data?
-        let colorScale = d3.scaleSequential(d3.interpolateRainbow).domain([1, 51]);
+        const mapJson = this.props.mapJson;
+        const mapDivisions = Object.keys(mapJson.objects)[0]; // TODO: How should we normalize the map data?
+        const colorScale = d3.scaleSequential(d3.interpolateRainbow).domain([1, 51]);
 
-        let mapPaths = topojson.feature(mapJson, mapJson.objects[mapDivisions]).features;
+        const mapPaths = topojson.feature(mapJson, mapJson.objects[mapDivisions]).features;
 
         g
             .selectAll('path')
@@ -82,6 +121,9 @@ export default class Map extends React.Component {
             .attr('d', path)
             .attr('data-index', function(data, i) {
                 return i;
+            })
+            .attr('data-country', function(data, i) {
+                return data.properties.name;
             })
             .attr('fill', function(data, i) {
                 return colorScale(Math.random() * 2 + i * 2);
@@ -116,7 +158,8 @@ export default class Map extends React.Component {
             active = d3.select(this).classed('active', true);
             // activeAnswer = d.properties.name;
 
-            var bounds = path.bounds(d),
+            props.SELECTED_COUNTRY(d.properties.name);
+            const bounds = path.bounds(d),
                 dx = bounds[1][0] - bounds[0][0],
                 dy = bounds[1][1] - bounds[0][1],
                 x = (bounds[0][0] + bounds[1][0]) / 2,
@@ -132,6 +175,7 @@ export default class Map extends React.Component {
 
         function reset() {
             active.classed('active', false);
+            props.SELECTED_COUNTRY('');
             active = d3.select(null);
 
             svg
@@ -156,3 +200,5 @@ export default class Map extends React.Component {
         }
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map);

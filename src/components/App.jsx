@@ -1,21 +1,27 @@
 import React from 'react';
-import GameConsole from './GameConsole.jsx';
-import Selector from './Selector.jsx';
+// import { connect } from 'react-redux';
+// import { bindActionCreators } from 'redux';
+// import * as actionCreators from '../actions/actionCreators';
 
-export default class App extends React.Component {
+import Header from './layout/Header.jsx';
+import GameConsole from './gameConsole/GameConsole.jsx';
+import Footer from './layout/Footer.jsx';
+
+class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            availableMaps: ['world'],
-            questions: []
         };
     }
+
     render() {
         return (
             <React.Fragment>
+                <Header />
                 <h1>Geo Quizzed</h1>
-                <Selector availableMaps={this.state.availableMaps} />
-                <GameConsole questions={this.state.questions} />
+                <GameConsole />
+                <Footer />
+
                 <style jsx>{`
                     h1 {
                         font-weight: 200;
@@ -27,10 +33,8 @@ export default class App extends React.Component {
     }
 
     componentDidMount() {
-        fetch('/getMaps')
-            .then((response) => response.json())
-            .then((json) => {
-                this.setState({ availableMaps: json.mapsList });
-            });
+
     }
 }
+
+export default App;
