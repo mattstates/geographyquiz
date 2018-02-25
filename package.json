@@ -42,7 +42,7 @@
 		"prettier-eslint": "^8.7.0",
 		"sass-loader": "^6.0.6",
 		"uglifyjs-webpack-plugin": "^1.2.2",
-		"webpack": "^3.10.0",
+		"webpack": "^3.11.0",
 		"webpack-dev-server": "^2.9.7",
 		"webpack-merge": "^4.1.2"
 	}

@@ -28,9 +28,3 @@ module.exports = {
         }]
     }
 };
-// plugins: [
-//     new CleanWebpackPlugin(['dist']),
-//     new HtmlWebpackPlugin({ template: './src/index.html' }),
-//     new webpack.NamedModulesPlugin(),
-//     new webpack.HotModuleReplacementPlugin()
-// ],
