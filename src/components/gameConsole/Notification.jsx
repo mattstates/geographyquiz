@@ -14,7 +14,6 @@ class Notification extends React.Component {
     }
 
     componentWillMount() {
-        console.log(this);
         if (this.props.correctAnswer !== null) {
             this.setState({ classes: this.props.correctAnswer ? 'correctAnswer' : 'wrongAnswer' });
         }
@@ -23,7 +22,6 @@ class Notification extends React.Component {
     }
 
     render() {
-        console.log(this.props, 'notification', this.state);
         return this.props.correctAnswer === null ? (
             ''
         ) : (

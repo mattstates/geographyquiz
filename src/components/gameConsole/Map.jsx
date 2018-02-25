@@ -1,4 +1,4 @@
-import * as d3 from 'd3';
+import * as d3 from 'd3'; // TODO: Only import what you need.
 import * as topojson from 'topojson';
 import * as d3geoProj from 'd3-geo-projection';
 import React from 'react';
@@ -8,19 +8,9 @@ import { bindActionCreators } from 'redux';
 import * as actionCreators from '../../actions/actionCreators';
 
 function mapStateToProps(store) {
-    // add all of these properties to props...
-    console.log(store);
     return {
-        correctAnswerCount: store.correctAnswerCount,
-        currentCountry: store.currentCountry,
-        currentMap: store.currentMap,
-        score: store.score,
-        currentQuestion: store.currentQuestion,
         previousQuestion: store.previousQuestion,
-        questionCount: store.questionCount,
-        mapJson: store.mapJson,
-        questions: store.questions,
-        selectedCountry: store.selectedCountry
+        mapJson: store.mapJson
     };
 }
 
@@ -49,14 +39,14 @@ class Map extends React.Component {
         this.d3MapGenerator();
     }
     shouldComponentUpdate(nextProps) {
-        return nextProps.attemptCount !== this.props.attemptCount; // Also check that the map type or JSON has changed.
+        return nextProps.attemptCount !== this.props.attemptCount; // TODO: Also check that the map type or JSON has changed.
     }
     componentDidUpdate() {
-        console.log(this.state, 'component did update')
-        this.reset();
+
+        this.reset(); // Call the D3 reset function when the component updates.
         let element;
         if (this.props.needsCorrection) {
-            console.log(this.props);
+
             const { previousQuestion } = this.props;
             element = [].slice.call(this.node.querySelectorAll('path')).find(function(element) {
                 return element.getAttribute('data-country') === previousQuestion;
@@ -106,7 +96,7 @@ class Map extends React.Component {
 
         svg.call(zoom); // delete this line to disable free zooming
 
-        // Code borrowed from https://bl.ocks.org/mbostock.
+        // https://bl.ocks.org/mbostock.
         const mapJson = this.props.mapJson;
         const mapDivisions = Object.keys(mapJson.objects)[0]; // TODO: How should we normalize the map data?
         const colorScale = d3.scaleSequential(d3.interpolateRainbow).domain([1, 51]);
@@ -182,8 +172,6 @@ class Map extends React.Component {
                 .transition()
                 .duration(750)
                 .call(zoom.transform, d3.zoomIdentity);
-
-            // activeAnswer = null;
         }
 
         function zoomed() {

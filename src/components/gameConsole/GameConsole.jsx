@@ -1,6 +1,3 @@
-import * as d3 from 'd3';
-import * as topojson from 'topojson';
-import * as d3geoProj from 'd3-geo-projection';
 import React from 'react';
 import Instructions from './Instructions.jsx';
 import Map from './Map.jsx';
@@ -12,23 +9,21 @@ import Notification from './Notification.jsx';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actionCreators from '../../actions/actionCreators';
+import * as actionCreators from '../../actions/actionCreators'; // TODO: Only import actions you use.
 
 function mapStateToProps(store) {
-    // console.log(store, 'Game Console map state to props');
-    // add all of these properties to props...
     return {
-        correctAnswerCount: store.correctAnswerCount,
-        currentCountry: store.currentCountry,
-        currentMap: store.currentMap,
+        // correctAnswerCount: store.correctAnswerCount,
+        // currentCountry: store.currentCountry,
+        // currentMap: store.currentMap,
         score: store.score,
         currentQuestion: store.currentQuestion,
         numberOfQuestionsAsked: store.numberOfQuestionsAsked,
         mapJson: store.mapJson,
         questions: store.questions,
         selectedCountry: store.selectedCountry,
-        attemptCount: store.attemptCount,
-        previousQuestion: store.previousQuestion
+        attemptCount: store.attemptCount
+        // previousQuestion: store.previousQuestion
     };
 }
 
@@ -52,9 +47,10 @@ class GameConsole extends React.Component {
     }
     submitAnswer(selectedCountry, currentQuestion) {
         this.setState({ showNotification: true });
-        console.log('submitted: ', selectedCountry, currentQuestion);
+
         if (selectedCountry === currentQuestion) {
             this.props.UPDATE_SCORE(true);
+            // TODO: Refactor duplicate randomization.
             this.props.SET_CURRENT_QUESTION(this.props.questions[Math.floor(Math.random() * this.props.questions.length)]);
             this.props.UPDATE_QUESTIONS_ASKED(this.props.numberOfQuestionsAsked);
             this.setState({ showCorrectAnswer: false });
@@ -67,6 +63,7 @@ class GameConsole extends React.Component {
         this.props.SET_PREVIOUS_QUESTION(this.props.currentQuestion);
 
     }
+
     nextQuestion() {
         this.props.SET_CURRENT_QUESTION(this.props.questions[Math.floor(Math.random() * this.props.questions.length)]);
         this.props.UPDATE_QUESTIONS_ASKED(this.props.numberOfQuestionsAsked);
@@ -76,12 +73,10 @@ class GameConsole extends React.Component {
     }
 
     hideNotificationTimeOut() {
-        console.warn('hide func')
         this.setState({showNotification: false})
     }
 
     render() {
-        console.log(this.state.showNotification)
         return this.props.mapJson ? (
             <React.Fragment>
                 <Instructions />

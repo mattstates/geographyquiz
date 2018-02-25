@@ -1,8 +1,4 @@
 import React from 'react';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-// import * as actionCreators from '../actions/actionCreators';
-
 import Header from './layout/Header.jsx';
 import GameConsole from './gameConsole/GameConsole.jsx';
 import Footer from './layout/Footer.jsx';
