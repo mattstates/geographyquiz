@@ -4,11 +4,10 @@
 	"description": "Geography game for high school students. Topojson maps from https://github.com/deldersveld/topojson",
 	"main": "./server/index.js",
 	"scripts": {
-		"build": "webpack -w --config webpack.dev.js",
+        "build": "webpack --config webpack.prod.js",
+        "build:dev": "webpack -w --config webpack.dev.js",
 		"test": "echo \"Error: no test specified\" && exit 1",
-        "start": "webpack -w --config webpack.dev.js",
-        "start-prod": "webpack --config webpack.prod.js",
-
+		"start": "node index.js",
 		"start:dev": "webpack-dev-server",
 		"nodemon": "nodemon index.js"
 	},
@@ -43,8 +42,7 @@
 		"nodemon": "^1.14.6",
 		"prettier-eslint": "^8.7.0",
 		"sass-loader": "^6.0.6",
-		"uglifyjs-webpack-plugin": "^1.2.2",
-		"webpack": "^3.11.0",
+		"webpack": "^3.10.0",
 		"webpack-dev-server": "^2.9.7",
 		"webpack-merge": "^4.1.2"
 	}
