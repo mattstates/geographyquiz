@@ -31,11 +31,5 @@ app.get('/maps/usa', (req, res) => {
 app.get('/getMaps', (req, res) => {
     res.json({ mapsList: ['world'] });
 });
-console.log('about to "listen"')
-// app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
-var server_port = process.env.YOUR_PORT || process.env.PORT || 3000;
-var server_host = process.env.YOUR_HOST || '0.0.0.0';
-app.listen(server_port, server_host, function() {
-    console.log('Listening on port %d', server_port);
-});
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
