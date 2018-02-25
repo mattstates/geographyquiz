@@ -17,7 +17,7 @@ class App extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Header />
+                {/* <Header /> */}
                 <h1>Geo Quizzed</h1>
                 <GameConsole />
                 <Footer />
