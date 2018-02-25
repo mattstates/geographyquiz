@@ -4,7 +4,7 @@
 	"description": "Geography game for high school students. Topojson maps from https://github.com/deldersveld/topojson",
 	"main": "./server/index.js",
 	"scripts": {
-		"build": "webpack --config webpack.dev.js",
+		"build": "webpack -w --config webpack.dev.js",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "webpack --config webpack.prod.js",
 		"start:dev": "webpack-dev-server",
