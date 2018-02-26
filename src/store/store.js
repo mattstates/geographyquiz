@@ -9,18 +9,23 @@ import rootReducer from '../reducers/rootReducer.js';
     if a default map is loaded, it also has to generate the questions for that map
 */
 const defaultState = {
-    score: 0,
-    correctAnswerCount: 0,
-    numberOfQuestionsAsked: 0,
-    currentQuestion: '',
-    previousQuestion: '',
-    currentCountry: '',
-    loggedIn: false,
-    currentMap: 'world',
-    mapJson: null,
-    questions: [],
-    selectedCountry: null,
-    attemptCount: 0
+    applicationReducer: {
+        loggedIn: false
+    },
+    gameConsoleReducer: {
+        attemptCount: 0,
+        correctAnswerCount: 0,
+        currentCountry: '',
+        currentMap: 'world',
+        currentQuestion: '',
+        loggedIn: false,
+        mapJson: null,
+        numberOfQuestionsAsked: 0,
+        previousQuestion: '',
+        questions: [],
+        score: 0,
+        selectedCountry: null
+    }
 };
 
 const store = createStore(rootReducer, defaultState);

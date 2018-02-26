@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Instructions(props) {
+export default (props) => {
     const selectionType = props.mapType !== 'world' ? 'country' : 'state';
     return (
         <div className='instructions'>
@@ -12,11 +12,11 @@ export default function Instructions(props) {
                     text-align: center;
                 }
                 p {
-                    max-width: ${window.outerWidth > 1000 ? '70%' : '100%'};
                     margin: 1rem auto;
+                    max-width: ${window.outerWidth > 1000 ? '70%' : '100%'};
                 }
             `}
             </style>
         </div>
     );
-}
+};

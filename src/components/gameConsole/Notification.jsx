@@ -1,4 +1,5 @@
 import React from 'react';
+import { colors } from '../globalStyles.js';
 
 class Notification extends React.Component {
     constructor(props) {
@@ -27,32 +28,46 @@ class Notification extends React.Component {
         ) : (
             <React.Fragment>
                 <div onClick={this.removeClasses} className={this.state.classes}>
-                    {this.props.correctAnswer ? 'You got it!' : 'Try Again'}
+                    <span>{this.props.correctAnswer ? 'You got it!' : 'Try Again'}</span>
                 </div>
                 <style jsx>{`
                     div {
-                        border-radius: 6px;
-                        color: white;
+                        align-items: center;
                         display: flex;
                         flex-direction: column;
                         font-weight: bold;
                         justify-content: center;
-                        opacity; .1;
-                        padding: 8px 16px;
                         text-align: center;
                         text-transform: uppercase;
-                        transition: all 1s;
-                        transform: translateY(0px);
                     }
-					div.correctAnswer, div.wrongAnswer {
-                        opacity: .9;
+                    div.correctAnswer span {
+                        border-bottom: 3px solid ${colors.green};
                     }
-                    div.correctAnswer {
-                        background-color: green;
+                    div.wrongAnswer span {
+                        border-bottom: 3px solid ${colors.red};
                     }
-                    div.wrongAnswer {
-                        background-color: red;
+                    span {
+                        animation: 2000ms ease 1 showhide;
+                        color: ${colors.black};
+                        height: auto;
+                        opacity: 0;
+                        padding: 8px 16px;
+                        width: 100%;
                     }
+                    @keyframes showhide {
+                        0% {
+                            opacity: 0;
+                        }
+                        20% {
+                            opacity: 1;
+                        }
+                        80% {
+                            opacity: 1;
+                        }
+                        100% {
+                            opacity: 0;
+                        }
+                      }
                     
                     
 				`}</style>

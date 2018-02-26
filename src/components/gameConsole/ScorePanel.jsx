@@ -11,8 +11,8 @@ export default (props) => {
             <style jsx>{`
 				div.scoreRow {
 					display: flex;
-                    justify-content: space-around;
-                    margin: 32px auto;
+					justify-content: space-around;
+					margin: 32px auto;
 				}
 			`}</style>
         </React.Fragment>

@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import * as actionCreators from '../../actions/actionCreators';
 
 function mapStateToProps(store) {
+    store = store.gameConsoleReducer;
     return {
         previousQuestion: store.previousQuestion,
         mapJson: store.mapJson

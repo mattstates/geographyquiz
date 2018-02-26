@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { colors } from '../globalStyles.js';
 export default (props) => {
     return (
         <React.Fragment>
@@ -8,10 +8,11 @@ export default (props) => {
             </button>
             <style jsx>{`
 					button {
-                        background-color: ${globalColors.red};
-                        border: none;
+                        background-color: ${colors.red};
                         border-radius: 6px;
-                        color: #eee;
+                        border: none;
+                        color: ${colors.gray};
+                        font-size: inherit;
                         font-weight: bold;
                         outline: none;
                         padding: 8px 16px;
@@ -21,17 +22,17 @@ export default (props) => {
                         text-transform: uppercase;
                     }
                     button.submitAnswer {
-                        background-color: ${globalColors.green};
-                        color: ${globalColors.black};
+                        background-color: ${colors.green};
+                        color: ${colors.black};
                     }
                     button:hover {
                         cursor: pointer;
                     }
                     button.disabled {
-                        color: ${globalColors.black};
+                        background-color: ${colors.yellow};
+                        color: ${colors.black};
                         cursor: default;
-                        pointer-events; none;
-                        background-color: ${globalColors.yellow};
+                        pointer-events: none;
                     }
 				`}</style>
         </React.Fragment>

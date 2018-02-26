@@ -1,4 +1,7 @@
 {
+    "parser": "babel-eslint",
+    "plugins": ["react"],
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
 	"rules": {
 		"no-alert": 2,
 		"no-array-constructor": 0,
@@ -67,7 +70,7 @@
 		"no-obj-calls": 2,
 		"no-octal": 2,
 		"no-octal-escape": 0,
-		"no-param-reassign": 1,
+		"no-param-reassign": 0,
 		"no-path-concat": 0,
 		"no-plusplus": 0,
 		"no-process-env": 0,
@@ -234,12 +237,15 @@
 		"vars-on-top": 0,
 		"wrap-iife": 0,
 		"wrap-regex": 0,
-		"yoda": [0, "never"]
+        "yoda": [0, "never"],
+        "react/display-name": 0,
+        "react/prop-types": 0,
+        "react/no-unescaped-entities": 0
 	},
 	"env": {
 		"node": true,
-        "es6": true,
-        "browser": true
+		"es6": true,
+		"browser": true
 	},
 	"parserOptions": {
 		"ecmaVersion": 6,

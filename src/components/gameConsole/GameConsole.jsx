@@ -6,16 +6,15 @@ import Selector from './Selector.jsx';
 import Button from '../generic/Button.jsx';
 import ScorePanel from './ScorePanel.jsx';
 import Notification from './Notification.jsx';
+import FlexRow from '../generic/FlexRow.jsx';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../../actions/actionCreators'; // TODO: Only import actions you use.
 
 function mapStateToProps(store) {
+    store = store.gameConsoleReducer;
     return {
-        // correctAnswerCount: store.correctAnswerCount,
-        // currentCountry: store.currentCountry,
-        // currentMap: store.currentMap,
         score: store.score,
         currentQuestion: store.currentQuestion,
         numberOfQuestionsAsked: store.numberOfQuestionsAsked,
@@ -23,7 +22,6 @@ function mapStateToProps(store) {
         questions: store.questions,
         selectedCountry: store.selectedCountry,
         attemptCount: store.attemptCount
-        // previousQuestion: store.previousQuestion
     };
 }
 
@@ -35,16 +33,16 @@ class GameConsole extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loaded: false,
             mapType: '', // country || world
             showCorrectAnswer: false,
             answeredCorrectly: null,
             showNotification: false
         };
-        this.submitAnswer = this.submitAnswer.bind(this);
-        this.nextQuestion = this.nextQuestion.bind(this);
         this.hideNotificationTimeOut = this.hideNotificationTimeOut.bind(this);
+        this.nextQuestion = this.nextQuestion.bind(this);
+        this.submitAnswer = this.submitAnswer.bind(this);
     }
+
     submitAnswer(selectedCountry, currentQuestion) {
         this.setState({ showNotification: true });
 
@@ -61,7 +59,6 @@ class GameConsole extends React.Component {
         }
         this.props.UPDATE_ATTEMPT_COUNT(this.props.attemptCount);
         this.props.SET_PREVIOUS_QUESTION(this.props.currentQuestion);
-
     }
 
     nextQuestion() {
@@ -73,17 +70,17 @@ class GameConsole extends React.Component {
     }
 
     hideNotificationTimeOut() {
-        this.setState({showNotification: false})
+        this.setState({ showNotification: false });
     }
 
     render() {
         return this.props.mapJson ? (
             <React.Fragment>
-                <Instructions />
+                {this.props.score !== 0 ? null : <Instructions />}
                 {/* <Selector availableMaps={this.state.availableMaps} /> */}
                 <Map mapJson={this.props.mapJson} attemptCount={this.props.attemptCount} needsCorrection={this.state.showCorrectAnswer} />
                 <Question questionCount={this.props.numberOfQuestionsAsked} currentQuestion={this.props.currentQuestion} />
-                <div className="controlRow">
+                <FlexRow>
                     <Button
                         disabled={Boolean(!this.props.selectedCountry)}
                         clickFunc={this.submitAnswer.bind(this, this.props.selectedCountry, this.props.currentQuestion)}
@@ -91,30 +88,20 @@ class GameConsole extends React.Component {
                         buttonText={'submit answer'}
                     />
                     {this.state.showNotification ? <Notification hide={this.hideNotificationTimeOut} correctAnswer={this.state.answeredCorrectly} /> : null}
-
                     <Button clickFunc={this.nextQuestion} classes={['nextQuestion']} buttonText={'next question'} />
-                </div>
+                </FlexRow>
 
                 <ScorePanel score={this.props.score} attemptCount={this.props.attemptCount} />
-                <style jsx>{`
-					div.controlRow {
-						display: flex;
-                        justify-content: space-between;
-                        margin: 0 auto;
-                        max-width: 500px;
-                        min-height: 36px;
-					}
-				`}</style>
             </React.Fragment>
         ) : (
             <div>
                 <p>Loading...</p>
                 <style jsx>{`
-					p {
-						font-size: 24px;
-						text-align: center;
-					}
-				`}</style>
+                    p {
+                        font-size: 24px;
+                        text-align: center;
+                    }
+                `}</style>
             </div>
         );
     }

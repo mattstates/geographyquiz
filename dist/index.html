@@ -1,175 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Geography Game</title>
+        <script>
+            
+        </script>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Geography Game</title>
-    <script>
-        const globalColors = {
-                darkBlue: '#080824e6',
-                black: '#060301',
-                beige: '#f0e1a8',
-                yellow: '#fbe48b',
-                orange: '#eab06e',
-                pink: '#edbc9b',
-                green: '#b6db66',
-                red: '#b9415c'
+        <style>
+            body {
+                font-family: Helvetica, Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                width: 100vw;
             }
-    </script>
-</head>
-<style>
-    body {
-        font-family: Helvetica, Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        width: 100vw;
-    }
 
-    /* #status {
-        border-radius: 10px;
-        color: white;
-        display: block;
-        margin: 0 auto;
-        padding: 30px;
-        text-align: center;
-        width: 100px;
-    } */
+            svg.map {
+                background-color: rgba(8, 8, 36, 0.9);
+                display: block;
+                margin: 0 auto;
+            }
 
-    /* .init {
-        opacity: 0;
-        transform: translateY(-250px);
-        font-family: Helvetica, Arial, sans-serif;
-    } */
+            .disable {
+                pointer-events: none;
+            }
 
-    /* .correct {
-        background-color: rgba(0, 200, 0, .7);
-        animation-name: answer;
-        animation-duration: 1s;
-    } */
+            .learnCountry {
+                animation-duration: 200ms;
+                animation-iteration-count: 15;
+                animation-name: countryID;
+                opacity: 1;
+                stroke-width: 5;
+                stroke: white;
+            }
 
-    /* .wrong {
-        background-color: rgba(200, 0, 0, .7);
-        animation-name: answer;
-        animation-duration: 1s;
-    } */
+            @keyframes countryID {
+                0% {
+                    fill: beige;
+                    opacity: 1;
+                    stroke: red;
+                }
+                25% {
+                    fill: red;
+                    opacity: .1;
+                    stroke: beige;
+                }
+                75% {
+                    fill: beige;
+                    opacity: 1;
+                    stroke: red;
+                }
+            }
 
+            @keyframes active {
+                0% {
+                    fill-opacity: 1;
+                    stroke: aliceblue;
+                }
+                50% {
+                    fill-opacity: .7;
+                    stroke: cyan;
+                }
+            }
 
-    svg.map {
-        display: block;
-        margin: 0 auto;
-        background-color: rgba(8, 8, 36, 0.9);
-        margin: 0 auto;
-    }
+            .background {
+                fill: none;
+                pointer-events: all;
+            }
 
-    /* .btn-group {
-        display: flex;
-        justify-content: space-around;
-        margin: 0 auto;
-        padding: 24px 0;
-        width: 85%;
-    } */
+            .feature {
+                cursor: pointer;
+            }
 
-    .disable {
-        pointer-events: none;
-    }
+            .hover {
+                fill: yellow;
+            }
 
-    .learnCountry {
-        animation-name: countryID;
-        animation-iteration-count: 15;
-        animation-duration: 200ms;
-        stroke-width: 5;
-        stroke: white;
-        opacity: 1;
-    }
+            .active {
+                animation-duration: 1500ms;
+                animation-iteration-count: infinite;
+                animation-name: active;
+                fill-opacity: 1;
+                fill: red;
+                stroke-opacity: 1;
+                stroke-width: 1.5;
+                stroke: white;
+                transition: opacity 200ms;
+            }
 
-    @keyframes countryID {
-        0% {
-            opacity: 1;
-            fill: beige;
-            stroke: red;
-        }
-        25% {
-            opacity: .1;
-            fill: red;
-            stroke: beige;
-        }
-        75% {
-            opacity: 1;
-            fill: beige;
-            stroke: red;
-        }
-    }
-
-    /* @keyframes answer {
-        0% {
-            opacity: 0
-        }
-        50% {
-            opacity: 1
-        }
-        99% {
-            opacity: 1
-        }
-        100% {
-            opacity: 0;
-            transform: translateY(-380px);
-        }
-    } */
-
-    @keyframes active {
-        0% {
-            stroke: aliceblue;
-            fill-opacity: 1;
-        }
-        50% {
-            stroke: cyan;
-            fill-opacity: .7;
-        }
-    }
-
-    
-
-    .background {
-        fill: none;
-        pointer-events: all;
-    }
-
-    .feature {
-        cursor: pointer;
-    }
-
-    .hover {
-        fill: yellow;
-    }
-
-    .active {
-        fill: red;
-        stroke: white;
-        stroke-opacity: 1;
-        stroke-width: 1.5;
-        fill-opacity: 1;
-        animation-name: active;
-        animation-duration: 1500ms;
-        animation-iteration-count: infinite;
-        transition: opacity 200ms;
-    }
-
-    .mesh {
-        fill: none;
-        stroke: rgba(50, 50, 50, 0.7);
-        stroke-linecap: round;
-        stroke-linejoin: round;
-    }
-</style>
-
-<body>
-
+            .mesh {
+                fill: none;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+                stroke: rgba(50, 50, 50, 0.7);
+            }
+        </style>
+    </head>
+    <body>
         <!-- React Entry -->
         <div id="app"></div>
-
-
-<script type="text/javascript" src="app.bundle.js"></script></body>
+    <script type="text/javascript" src="app.bundle.js"></script></body>
 
 </html>

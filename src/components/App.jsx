@@ -6,8 +6,7 @@ import Footer from './layout/Footer.jsx';
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-        };
+        this.state = {};
     }
 
     render() {
@@ -19,17 +18,13 @@ class App extends React.Component {
                 <Footer />
 
                 <style jsx>{`
-                    h1 {
-                        font-weight: 200;
-                        text-align: center;
-                    }
-                `}</style>
+					h1 {
+						font-weight: 200;
+						text-align: center;
+					}
+				`}</style>
             </React.Fragment>
         );
-    }
-
-    componentDidMount() {
-
     }
 }
 
