@@ -8,5 +8,6 @@ const user = require('../controllers/userController.js');
 
 router.get('/', home.home);
 router.get('/maps/world', maps.world);
+router.get('/testprod', user.createUser);
 
 module.exports = router;
