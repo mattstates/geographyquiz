@@ -1,7 +1,7 @@
 import * as d3 from 'd3'; // TODO: Only import what you need.
 import * as topojson from 'topojson';
 import * as d3geoProj from 'd3-geo-projection';
-import React from 'react';
+import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -19,7 +19,7 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(actionCreators, dispatch);
 }
 
-class Map extends React.Component {
+class Map extends Component {
     constructor(props) {
         super(props);
         this.state = {

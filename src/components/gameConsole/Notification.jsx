@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { colors } from '../globalStyles.js';
 
-class Notification extends React.Component {
+class Notification extends Component {
     constructor(props) {
         super();
         this.state = {

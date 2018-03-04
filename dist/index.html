@@ -1,106 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Geography Game</title>
-        <script>
-            
-        </script>
 
-        <style>
-            body {
-                font-family: Helvetica, Arial, sans-serif;
-                margin: 0;
-                padding: 0;
-                width: 100vw;
-            }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Geography Game</title>
 
-            svg.map {
-                background-color: rgba(8, 8, 36, 0.9);
-                display: block;
-                margin: 0 auto;
-            }
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+        }
 
-            .disable {
-                pointer-events: none;
-            }
+        svg.map {
+            background-color: rgba(8, 8, 36, 0.9);
+            display: block;
+            margin: 0 auto;
+        }
 
-            .learnCountry {
-                animation-duration: 200ms;
-                animation-iteration-count: 15;
-                animation-name: countryID;
+        .disable {
+            pointer-events: none;
+        }
+
+        .learnCountry {
+            animation-duration: 200ms;
+            animation-iteration-count: 15;
+            animation-name: countryID;
+            opacity: 1;
+            stroke-width: 5;
+            stroke: white;
+        }
+
+        @keyframes countryID {
+            0% {
+                fill: beige;
                 opacity: 1;
-                stroke-width: 5;
-                stroke: white;
+                stroke: red;
             }
-
-            @keyframes countryID {
-                0% {
-                    fill: beige;
-                    opacity: 1;
-                    stroke: red;
-                }
-                25% {
-                    fill: red;
-                    opacity: .1;
-                    stroke: beige;
-                }
-                75% {
-                    fill: beige;
-                    opacity: 1;
-                    stroke: red;
-                }
-            }
-
-            @keyframes active {
-                0% {
-                    fill-opacity: 1;
-                    stroke: aliceblue;
-                }
-                50% {
-                    fill-opacity: .7;
-                    stroke: cyan;
-                }
-            }
-
-            .background {
-                fill: none;
-                pointer-events: all;
-            }
-
-            .feature {
-                cursor: pointer;
-            }
-
-            .hover {
-                fill: yellow;
-            }
-
-            .active {
-                animation-duration: 1500ms;
-                animation-iteration-count: infinite;
-                animation-name: active;
-                fill-opacity: 1;
+            25% {
                 fill: red;
-                stroke-opacity: 1;
-                stroke-width: 1.5;
-                stroke: white;
-                transition: opacity 200ms;
+                opacity: .1;
+                stroke: beige;
             }
+            75% {
+                fill: beige;
+                opacity: 1;
+                stroke: red;
+            }
+        }
 
-            .mesh {
-                fill: none;
-                stroke-linecap: round;
-                stroke-linejoin: round;
-                stroke: rgba(50, 50, 50, 0.7);
+        @keyframes active {
+            0% {
+                fill-opacity: 1;
+                stroke: aliceblue;
             }
-        </style>
-    </head>
-    <body>
-        <!-- React Entry -->
-        <div id="app"></div>
-    <script type="text/javascript" src="app.bundle.js"></script></body>
+            50% {
+                fill-opacity: .7;
+                stroke: cyan;
+            }
+        }
+
+        .background {
+            fill: none;
+            pointer-events: all;
+        }
+
+        .feature {
+            cursor: pointer;
+        }
+
+        .hover {
+            fill: yellow;
+        }
+
+        .active {
+            animation-duration: 1500ms;
+            animation-iteration-count: infinite;
+            animation-name: active;
+            fill-opacity: 1;
+            fill: red;
+            stroke-opacity: 1;
+            stroke-width: 1.5;
+            stroke: white;
+            transition: opacity 200ms;
+        }
+
+        .mesh {
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke: rgba(50, 50, 50, 0.7);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- React Entry -->
+    <div id="app"></div>
+<script type="text/javascript" src="app.bundle.js"></script></body>
 
 </html>

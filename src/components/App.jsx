@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Header from './layout/Header.jsx';
 import GameConsole from './gameConsole/GameConsole.jsx';
 import Footer from './layout/Footer.jsx';
 
-class App extends React.Component {
+class App extends Component {
     constructor(props) {
         super(props);
         this.state = {};

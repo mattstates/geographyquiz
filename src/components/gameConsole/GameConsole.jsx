@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Instructions from './Instructions.jsx';
 import Map from './Map.jsx';
 import Question from './Question.jsx';
@@ -29,7 +29,7 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(actionCreators, dispatch);
 }
 
-class GameConsole extends React.Component {
+class GameConsole extends Component {
     constructor(props) {
         super(props);
         this.state = {
