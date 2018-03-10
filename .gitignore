@@ -3,3 +3,6 @@
 env.js
 /server/keys.js
 .env
+www_geoquizzed_com.key
+www_geoquizzed_com.pem
+.vscode

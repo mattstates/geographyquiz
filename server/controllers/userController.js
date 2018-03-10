@@ -1,10 +1,18 @@
 const User = require('../models/user.js');
 
 exports.createUser = async (req, res) => {
-
-    const sampleUser = { userName: 'sample user', userEmail: ' sampleemail@asdf.acsd  ' }
+    console.log('route hit')
+    console.log(req);
     try {
-        await User.createUser(sampleUser);
+        // Take user data from the form and sanitize it, then send it to the createUser function.
+        // TODO: Sanitize
+        await User.createUser(
+            {
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                userEmail: req.body.email
+            }
+        );
         res.send('saved fo sho');
 
     } catch (err) {

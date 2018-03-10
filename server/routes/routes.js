@@ -6,8 +6,17 @@ const maps = require('../controllers/mapsController.js');
 const auth = require('../controllers/authController.js');
 const user = require('../controllers/userController.js');
 
+
+
 router.get('/', home.home);
+router.get('/game', home.home);
+router.get('/login', home.home);
+router.get('/privacypolicy', home.home);
 router.get('/maps/world', maps.world);
-router.get('/testprod', user.createUser);
+router.post('/createuser', user.createUser);
+
+router.get('/oauth/google', auth.googleLogin);
+router.get('/oauth/google/callback', auth.googleCallbackMW, auth.googleCallback);
+
 
 module.exports = router;

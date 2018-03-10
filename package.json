@@ -9,7 +9,8 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "node serverMain.js",
 		"start:dev": "webpack-dev-server",
-		"nodemon": "nodemon serverMain.js"
+		"nodemon": "nodemon serverMain.js",
+		"debug": "node serverMain.js"
 	},
 	"keywords": [
 		"d3",
@@ -19,17 +20,22 @@
 	"license": "MIT",
 	"dependencies": {
 		"babel-preset-stage-2": "^6.24.1",
+		"body-parser": "^1.18.2",
+		"bson-ext": "^2.0.0",
+		"cookie-parser": "^1.4.3",
 		"d3": "4.10.0",
 		"d3-geo-projection": "^2.3.2",
 		"dotenv": "^5.0.1",
 		"eslint": "^4.14.0",
 		"express": "^4.16.2",
+		"express-session": "^1.15.6",
 		"mongoose": "^5.0.7",
 		"passport": "^0.4.0",
-		"passport-google-oauth": "^1.0.0",
+		"passport-google-oauth20": "^1.0.0",
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0",
 		"react-redux": "^5.0.6",
+		"react-router-dom": "^4.2.2",
 		"redux": "^3.7.2",
 		"serve-favicon": "^2.4.5",
 		"styled-jsx": "^2.2.1",
