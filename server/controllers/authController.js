@@ -10,7 +10,6 @@ passport.use(
             callbackURL: process.env.GOOGLE_CALLBACK_URL
         },
         function(accessToken, refreshToken, response, cb) {
-            // console.log(accessToken, refreshToken, response);
             const emailAddress = response.emails.filter((email) => email.type === 'account')[0].value;
             User.findOne(
                 {
@@ -39,12 +38,10 @@ passport.use(
                             return cb(err, user);
                         });
                     } else {
-                        console.log('here in the else')
                         return cb(err, user);
                     }
                 }
             );
-            return cb(null, response);
         }
     )
 );
@@ -64,7 +61,10 @@ exports.googleLogin = passport.authenticate('google', { scope: ['profile', 'emai
 exports.googleCallbackMW = passport.authenticate('google', { failureRedirect: '/login' });
 
 exports.googleCallback = (req, res) => {
-    console.log('google callback!');
-    // Successful authentication, redirect home.
+    // TODO: Remove this.
     res.redirect('/');
 };
+
+exports.googleSuccess = (req, res) => {
+    res.redirect('/game');
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default (props) => {
     return (
@@ -23,11 +24,8 @@ export default (props) => {
                     >
                         DONATE
                     </a>
-
-                    {/* Created By:{' '}
-                    <a href="http://www.mattstates.com" target="_new">
-						Matt States
-                    </a> */}
+                    Copyright {new Date().getFullYear()}
+                    <Link to="/privacypolicy">Privacy</Link>
                 </div>
             </footer>
             <style jsx>{`
@@ -39,7 +37,12 @@ export default (props) => {
                 }
                 .footerContent {
                     background-color: #ededed;
+                    display: flex;
+                    justify-content: space-around;
                     padding: 16px 0;
+                }
+                footer a {
+                    text-decoration: none;
                 }
             `}</style>
         </React.Fragment>
