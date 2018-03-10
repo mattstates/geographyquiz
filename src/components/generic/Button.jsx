@@ -34,6 +34,9 @@ export default (props) => {
                         cursor: default;
                         pointer-events: none;
                     }
+                    @media (max-width: 450px) {
+                        button { max-width: 30%; }
+                    }
 				`}</style>
         </React.Fragment>
     );

@@ -6,6 +6,8 @@ import Welcome from './welcome/Welcome.jsx';
 import Login from './login/Login.jsx';
 import Footer from './layout/Footer.jsx';
 import { Route, Link } from 'react-router-dom';
+import reset from '../styles/reset.scss';
+import globalStyles from '../styles/globalStyles.scss';
 
 class App extends Component {
     constructor(props) {

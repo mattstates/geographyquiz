@@ -1,0 +1,27 @@
+section.privacyPolicy {
+    h2 {
+        font-weight: 200;
+        text-align: center;
+        text-decoration: underline;
+        text-underline-position: under;
+    }
+    .wrapper { margin: 42px auto; padding: 0 4rem; }
+    h3 { font-weight: 200; margin-top: 18px; }
+    p { font-style: italic; }
+    .policy {
+        border-left: 5px solid black;
+        margin: 0 auto;
+        max-width: 650px;
+        width: 100%;
+    }
+    a {
+        border-radius: 5px;
+        border: 1px solid gray;
+        display: block;
+        margin: 0 auto;
+        max-width: 100px;
+        padding: 1rem 2rem;
+        text-align: center;
+        text-transform: uppercase;
+    }
+}

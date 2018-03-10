@@ -10,7 +10,8 @@ export default (props) => {
 					justify-content: space-between;
 					margin: 0 auto;
 					max-width: 500px;
-					min-height: 36px;
+                    min-height: 36px;
+                    padding: 0 .5rem;
 				}
 			`}</style>
         </div>

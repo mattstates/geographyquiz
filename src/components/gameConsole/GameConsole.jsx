@@ -7,6 +7,7 @@ import Button from '../generic/Button.jsx';
 import ScorePanel from './ScorePanel.jsx';
 import Notification from './Notification.jsx';
 import FlexRow from '../generic/FlexRow.jsx';
+import mapStyles from '../../styles/mapStyles.scss';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -76,8 +77,9 @@ class GameConsole extends Component {
     render() {
         return this.props.mapJson ? (
             <React.Fragment>
-                {this.props.score !== 0 ? null : <Instructions />}
                 {/* <Selector availableMaps={this.state.availableMaps} /> */}
+                <ScorePanel score={this.props.score} attemptCount={this.props.attemptCount} />
+
                 <Map mapJson={this.props.mapJson} attemptCount={this.props.attemptCount} needsCorrection={this.state.showCorrectAnswer} />
                 <Question questionCount={this.props.numberOfQuestionsAsked} currentQuestion={this.props.currentQuestion} />
                 <FlexRow>
@@ -90,8 +92,8 @@ class GameConsole extends Component {
                     {this.state.showNotification ? <Notification hide={this.hideNotificationTimeOut} correctAnswer={this.state.answeredCorrectly} /> : null}
                     <Button clickFunc={this.nextQuestion} classes={['nextQuestion']} buttonText={'next question'} />
                 </FlexRow>
+                {this.props.score !== 0 ? null : <Instructions />}
 
-                <ScorePanel score={this.props.score} attemptCount={this.props.attemptCount} />
             </React.Fragment>
         ) : (
             <div>

@@ -14,6 +14,7 @@ router.get('/login', home.home);
 router.get('/privacypolicy', home.home);
 router.get('/maps/world', maps.world);
 router.post('/createuser', user.createUser);
+router.get('/images/:file', home.images);
 
 router.get('/oauth/google', auth.googleLogin, auth.googleSuccess);
 router.get('/oauth/google/callback', auth.googleCallbackMW, auth.googleCallback);

@@ -1,7 +1,7 @@
 import React from 'react';
 export default function LoginTest() {
     return (
-        <div>
+        <div className="login">
             {/* <form action="createuser" method="post">
                 <input name="firstName" placeholder="firstName" />
                 <input name="lastName" placeholder="lastName" />
@@ -27,10 +27,16 @@ export default function LoginTest() {
                         flex-direction: column;
                         height: 60px;
                         justify-content: center;
+                        margin: 18px auto;
                         text-align: center;
                         text-decoration: none;
                         width: 160px;
-
+                    }
+                    div.login {
+                        border: 2px dashed rgba(0,0,0,.125);
+                        margin:24px auto 0;
+                        max-width: 650px;
+                        padding: 32px 0;
                     }
                 `}</style>
         </div>

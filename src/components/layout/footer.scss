@@ -1,0 +1,17 @@
+footer {
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    a {
+        margin: 0 1rem;
+        padding: 0 1rem;
+        text-transform: uppercase;
+    }
+}
+.footerContent {
+    background-color: #ededed;
+    display: flex;
+    justify-content: center;
+    padding: 8px 0;
+}

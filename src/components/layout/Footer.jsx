@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import footer from './footer.scss';
 
 export default (props) => {
     return (
@@ -28,23 +29,6 @@ export default (props) => {
                     <Link to="/privacypolicy">Privacy</Link>
                 </div>
             </footer>
-            <style jsx>{`
-                footer {
-                    text-align: center;
-                    position: fixed;
-                    bottom: 0;
-                    width: 100%;
-                }
-                .footerContent {
-                    background-color: #ededed;
-                    display: flex;
-                    justify-content: space-around;
-                    padding: 16px 0;
-                }
-                footer a {
-                    text-decoration: none;
-                }
-            `}</style>
         </React.Fragment>
     );
 };

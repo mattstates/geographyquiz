@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import privacy from './privacyPolicy.scss';
 export default (props) => {
     const privacyStatements = [
         {
@@ -22,31 +23,23 @@ export default (props) => {
             title: 'Further Questions?',
             statement: 'Email geoquizzedweb@gmail.com'
         }
-    ]
+    ];
     return (
-        <React.Fragment>
-            <h1>Privacy Policy</h1>
-            {privacyStatements.map((policy, index) => { return (<div key={index} className='policy'><h2>{policy.title}</h2><p>{policy.statement}</p></div>) })}
-            <Link className="button" to="/">Back</Link>
-            <style jsx>{`
-					h1 {
-						font-weight: 200;
-                        text-align: center;
-                        text-decoration: underline;
-                        text-underline-position: under;
-                    }
-                    p, h2 { 
-                        margin: 0 auto;
-                        padding: 0 16px;
-                    }
-                    h2 { font-weight: 200; margin-top: 18px; }
-                    p { font-style: italic; }
-                    .policy {
-                        border-left: 5px solid black;
-                        margin: 0 auto;
-                        width: 80%;
-                    }
-				`}</style>
-        </React.Fragment>
+        <section className="privacyPolicy">
+            <h2>Privacy Policy</h2>
+            <div className="wrapper">
+                {privacyStatements.map((policy, index) => {
+                    return (
+                        <div key={index} className="policy">
+                            <h3>{policy.title}</h3>
+                            <p>{policy.statement}</p>
+                        </div>
+                    );
+                })}
+            </div>
+            <Link className="button" to="/">
+                Back
+            </Link>
+        </section>
     );
 };
